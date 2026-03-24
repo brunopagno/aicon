@@ -1,0 +1,17 @@
+services:
+  aicon:
+    build: .
+    container_name: aicon
+    environment:
+      - WORKSPACE=${WORKSPACE:-.}
+    volumes:
+      - claude:/root/.claude
+      - opencode:/root/.config/opencode
+      - ${WORKSPACE:-.}:/workspace
+    working_dir: /workspace
+    stdin_open: true
+    tty: true
+
+volumes:
+  claude:
+  opencode:
