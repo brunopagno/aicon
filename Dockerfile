@@ -3,12 +3,15 @@ FROM node:22-slim
 ARG UID=1000
 ARG GID=1000
 
-RUN groupadd -g $GID appuser && useradd -m -u $UID -g $GID appuser
+RUN groupmod -g $GID node && usermod -u $UID -g $GID node
 
-RUN npm install -g @anthropic-ai/claude-code opencode-ai \
+RUN npm install -g opencode-ai \
     && npm cache clean --force \
     && rm -rf /root/.npm
 
+RUN mkdir -p /home/node/.config/opencode \
+    && chown -R node:node /home/node/.config/opencode
+
 WORKDIR /workspace
-USER appuser
+USER node
 CMD ["bash"]

@@ -9,13 +9,11 @@ services:
     environment:
       - WORKSPACE=${WORKSPACE:-.}
     volumes:
-      - claude:/home/appuser/.claude
-      - opencode:/home/appuser/.config/opencode
+      - opencode:/home/node/.config/opencode
       - ${WORKSPACE:-.}:/workspace
     working_dir: /workspace
     stdin_open: true
     tty: true
 
 volumes:
-  claude:
   opencode:
